@@ -1,12 +1,15 @@
 """将证据声明转成可用于方案的现行资格。"""
 from datetime import date
+from .context import eligible
 
 def same_period(start,end,target):
     day=date.fromisoformat(target)
     return date.fromisoformat(start)<=day<=date.fromisoformat(end)
 
-def allowed(supply,demand,certificates,period):
+def allowed(supply,demand,certificates,period,state):
     s=supply['payload'];d=demand['payload']
+    good,why=eligible(s,d,state,period)
+    if not good:return False,why,None
     if s['product']!=d['product'] or s['market']!=d['market']:
         return False,'产品或市场不匹配',None
     if not same_period(s['start'],s['end'],period):

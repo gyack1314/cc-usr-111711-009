@@ -1,7 +1,7 @@
 """在单期已确认供应约束内形成可解释的分配。"""
 from .policy import allowed,classify_inputs
 
-def plan(supplies,demands,certificates,period):
+def plan(supplies,demands,certificates,period,state):
     problems=classify_inputs(supplies,demands,certificates)
     if problems:return {'allocations':[],'unmet':[],'reasons':problems}
     inventory={s['id']:s['payload']['quantity'] for s in supplies}
@@ -10,7 +10,7 @@ def plan(supplies,demands,certificates,period):
         remaining=demand['payload']['quantity']
         options=[]
         for supply in supplies:
-            ok,reason,certificate=allowed(supply,demand,certificates,period)
+            ok,reason,certificate=allowed(supply,demand,certificates,period,state)
             if ok:options.append((supply['payload']['unit_cost'],supply['id'],supply,certificate))
             else:reasons.append({'demand':demand['id'],'supply':supply['id'],'reason':reason})
         for _,_,supply,certificate in sorted(options):
