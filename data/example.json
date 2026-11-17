@@ -1,0 +1,101 @@
+{
+  "period": "2026-11-20",
+  "known_at": [
+    "2026-11-12T00:00:00+00:00",
+    "2026-11-16T00:00:00+00:00"
+  ],
+  "documents": [
+    {
+      "source": "supply-office",
+      "document_id": "supply-1",
+      "revision": "r1",
+      "received_at": "2026-11-10T00:00:00+00:00",
+      "records": [
+        {
+          "kind": "supply",
+          "id": "reserve-1",
+          "revision": "r1",
+          "valid_from": "2026-11-01",
+          "payload": {
+            "product": "hydrogen",
+            "market": "market-A",
+            "batch": "reserve-1",
+            "quantity": 60,
+            "unit_cost": 5.1,
+            "intensity": 0.21,
+            "start": "2026-11-01",
+            "end": "2026-12-31",
+            "claim_scope": "备用库存、合同优先级与恢复次序需共享。"
+          }
+        }
+      ]
+    },
+    {
+      "source": "buyer-office",
+      "document_id": "demand-1",
+      "revision": "r1",
+      "received_at": "2026-11-10T01:00:00+00:00",
+      "records": [
+        {
+          "kind": "demand",
+          "id": "ship-contract-1",
+          "revision": "r1",
+          "valid_from": "2026-11-01",
+          "payload": {
+            "product": "hydrogen",
+            "market": "market-A",
+            "quantity": 80,
+            "priority": 1,
+            "required_certificate": "verified",
+            "start": "2026-11-01",
+            "end": "2026-12-31"
+          }
+        }
+      ]
+    },
+    {
+      "source": "certificate-office",
+      "document_id": "certificate-1",
+      "revision": "r1",
+      "received_at": "2026-11-11T00:00:00+00:00",
+      "records": [
+        {
+          "kind": "certificate",
+          "id": "cert-reserve-1",
+          "revision": "r1",
+          "valid_from": "2026-11-01",
+          "payload": {
+            "batch": "reserve-1",
+            "standard": "verified",
+            "state": "active",
+            "start": "2026-11-01",
+            "end": "2026-12-31",
+            "quantity": 60
+          }
+        }
+      ]
+    },
+    {
+      "source": "certificate-office",
+      "document_id": "certificate-2",
+      "revision": "r1",
+      "received_at": "2026-11-15T00:00:00+00:00",
+      "records": [
+        {
+          "kind": "certificate",
+          "id": "cert-reserve-1",
+          "revision": "r2",
+          "valid_from": "2026-11-01",
+          "payload": {
+            "batch": "reserve-1",
+            "standard": "verified",
+            "state": "suspended",
+            "start": "2026-11-01",
+            "end": "2026-12-31",
+            "quantity": 60
+          }
+        }
+      ]
+    }
+  ]
+}
